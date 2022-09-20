@@ -3,10 +3,15 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/jacolpn/go-api-gin/controllers"
+	docs "github.com/jacolpn/go-api-gin/docs"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func HandleRequests() {
 	r := gin.Default()
+
+	docs.SwaggerInfo_swagger.BasePath = "/"
 
 	// Renderizar as páginas HTML.
 	r.LoadHTMLGlob("templates/*")
@@ -28,6 +33,9 @@ func HandleRequests() {
 	// HTML.
 	r.GET("/index", controllers.ExibePaginaIndex)
 	r.NoRoute(controllers.RotaNaoEncontrada)
+
+	// Swagger.
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	r.Run(":5000")
 }

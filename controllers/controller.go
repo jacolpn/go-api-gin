@@ -6,8 +6,19 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jacolpn/go-api-gin/database"
 	"github.com/jacolpn/go-api-gin/models"
+	_ "github.com/swaggo/swag/example/celler/httputil"
 )
 
+// ExibeTodosAlunos godoc
+// @Summary      Exibir todos os produtos
+// @Description  Rota para exibir todos os alunos
+// @Tags         alunos
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  model.Aluno
+// @Failure      400  {object}  httputil.HTTPError
+// @Failure      404  {object}  httputil.HTTPError
+// @Router       /alunos [get]
 func ExibeTodosAlunos(c *gin.Context) {
 	var alunos []models.Aluno
 
@@ -25,6 +36,18 @@ func Saudacao(c *gin.Context) {
 	})
 }
 
+// CriaNovoAluno godoc
+// @Summary      Cria novo aluno
+// @Description  Rota para criar um novo aluno
+// @Tags         alunos
+// @Accept       json
+// @Produce      json
+// @Param        aluno   body	models.Aluno  true  "Modelo do aluno"
+// @Success      200  {object}  model.Aluno
+// @Failure      400  {object}  httputil.HTTPError
+// @Failure      404  {object}  httputil.HTTPError
+// @Failure      500  {object}  httputil.HTTPError
+// @Router       /alunos [post]
 func CriaNovoAluno(c *gin.Context) {
 	var aluno models.Aluno
 
